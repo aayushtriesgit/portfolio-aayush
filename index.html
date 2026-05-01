@@ -4,23 +4,22 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Aayush Khadka — Civil Engineer</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
 <style>
   /* =============================================
-     DESIGN TOKENS — edit these to restyle easily
+     DESIGN TOKENS
      ============================================= */
   :root {
-    --bg:        #F5F2EC;
-    --surface:   #FFFFFF;
-    --ink:       #1A1A18;
-    --ink-muted: #6B6B65;
-    --accent:    #2A5C45;      /* deep green — water/nature */
-    --accent2:   #BFD9CC;      /* pale green tint */
-    --border:    rgba(26,26,24,.1);
-    --radius:    12px;
-    --mono:      'DM Mono', monospace;
-    --serif:     'DM Serif Display', serif;
-    --sans:      'DM Sans', sans-serif;
+    --bg:        #F8F7F4;
+    --surface:   #F2F0EC;
+    --ink:       #2C2C28;
+    --ink-muted: #8A8880;
+    --ink-faint: #B8B6B2;
+    --accent:    #4A6E5A;
+    --border:    #E4E2DC;
+    --radius:    8px;
+    --sans:      'Inter', sans-serif;
+    --serif:     'Lora', serif;
   }
 
   /* =============================================
@@ -32,440 +31,337 @@
     font-family: var(--sans);
     background: var(--bg);
     color: var(--ink);
-    font-size: 16px;
-    line-height: 1.7;
+    font-size: 15px;
+    line-height: 1.75;
   }
   a { color: inherit; text-decoration: none; }
-  img { display: block; max-width: 100%; }
 
   /* =============================================
      NAV
      ============================================= */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1rem 2.5rem;
-    background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    padding: .9rem 2rem;
+    background: rgba(248,247,244,.92);
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
-    transition: box-shadow .3s;
-  }
-  nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.06); }
-  .nav-logo {
-    font-family: var(--mono);
-    font-size: 13px;
-    letter-spacing: .05em;
-    color: var(--accent);
   }
   .nav-links { display: flex; gap: 2rem; }
   .nav-links a {
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: .04em;
-    color: var(--ink-muted);
+    font-size: 12px; font-weight: 400; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--ink-muted);
     transition: color .2s;
   }
-  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* =============================================
+     SECTIONS SHARED
+     ============================================= */
+  section {
+    padding: 6rem 2rem;
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  section.wide { max-width: 860px; }
+  .divider {
+    width: 32px; height: 1px;
+    background: var(--ink-faint);
+    margin: 0 auto 1rem;
+  }
+  .eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--ink-muted);
+    margin-bottom: .75rem;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -.01em;
+    margin-bottom: 1.5rem;
+  }
+  .body-text {
+    color: var(--ink-muted);
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* Fade in */
+  .fade-in { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
 
   /* =============================================
      HERO
      ============================================= */
   #hero {
     min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 0 2.5rem 4rem;
-    position: relative;
-    overflow: hidden;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding-top: 5rem;
+    text-align: center;
+    max-width: none;
+    border-bottom: 1px solid var(--border);
   }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 60% 50% at 80% 20%, #C8DDD5 0%, transparent 60%),
-      radial-gradient(ellipse 40% 40% at 10% 80%, #D6E8DF 0%, transparent 60%),
-      var(--bg);
-  }
-  .hero-grid {
-    position: absolute; inset: 0; opacity: .18;
-    background-image:
-      linear-gradient(var(--accent2) 1px, transparent 1px),
-      linear-gradient(90deg, var(--accent2) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
-  .hero-content { position: relative; z-index: 1; max-width: 900px; }
-  .hero-eyebrow {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1.25rem;
-    display: flex; align-items: center; gap: .75rem;
-  }
-  .hero-eyebrow::before {
-    content: '';
-    display: block; width: 32px; height: 1px;
-    background: var(--accent);
-  }
-  h1 {
+  .hero-name {
     font-family: var(--serif);
-    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-size: clamp(3rem, 9vw, 6rem);
+    font-weight: 400;
     line-height: 1.05;
     letter-spacing: -.02em;
-    margin-bottom: 1.5rem;
+    margin-bottom: .75rem;
   }
-  h1 em { font-style: italic; color: var(--accent); }
-  .hero-desc {
-    font-size: 1.05rem;
-    color: var(--ink-muted);
-    max-width: 540px;
+  .hero-name em { font-style: italic; color: var(--accent); }
+  .hero-title {
+    font-size: 12px; font-weight: 400; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--ink-muted);
     margin-bottom: 2rem;
   }
-  .hero-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2.5rem; }
-  .pill {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: .06em;
-    padding: .35rem .8rem;
-    border-radius: 999px;
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    background: transparent;
-    transition: background .2s, color .2s;
+  .hero-desc {
+    font-size: 15px; color: var(--ink-muted); line-height: 1.8;
+    max-width: 460px; margin: 0 auto 2.5rem;
   }
-  .pill:hover { background: var(--accent); color: #fff; }
-  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  /* ✏️ EDIT: Add/remove skill tags */
+  .tag-row { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-bottom: 3rem; }
+  .tag {
+    font-size: 11px; font-weight: 400; letter-spacing: .04em;
+    padding: .3rem .75rem;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--ink-muted);
+  }
+  .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
   .btn {
-    display: inline-flex; align-items: center; gap: .5rem;
-    padding: .75rem 1.6rem;
-    font-size: 13px; font-weight: 500; letter-spacing: .04em;
+    display: inline-block;
+    padding: .6rem 1.4rem;
+    font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
     border-radius: var(--radius);
-    cursor: pointer;
-    transition: transform .15s, box-shadow .15s;
+    cursor: pointer; transition: background .2s, color .2s, border-color .2s;
   }
-  .btn:active { transform: scale(.98); }
-  .btn-primary {
-    background: var(--accent); color: #fff; border: none;
-    box-shadow: 0 4px 20px rgba(42,92,69,.25);
-  }
-  .btn-primary:hover { box-shadow: 0 6px 28px rgba(42,92,69,.35); }
-  .btn-outline {
-    background: transparent; color: var(--ink);
-    border: 1px solid var(--border);
-  }
-  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-
-  /* scroll indicator */
-  .scroll-hint {
-    position: absolute; bottom: 2rem; right: 2.5rem; z-index: 1;
-    display: flex; flex-direction: column; align-items: center; gap: .4rem;
-  }
-  .scroll-hint span {
-    font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
-    color: var(--ink-muted); writing-mode: vertical-rl;
-  }
+  .btn-primary { background: var(--ink); color: var(--bg); border: 1px solid var(--ink); }
+  .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+  .btn-outline { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--ink-muted); }
   .scroll-line {
-    width: 1px; height: 48px; background: var(--accent); opacity: .4;
-    animation: scrollPulse 2s ease-in-out infinite;
+    margin-top: 4rem;
+    width: 1px; height: 48px; background: var(--ink-faint);
+    animation: pulse 2s ease-in-out infinite;
   }
-  @keyframes scrollPulse {
-    0%,100% { transform: scaleY(1); opacity: .4; }
-    50% { transform: scaleY(.4); opacity: .9; }
-  }
+  @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:.8} }
 
   /* =============================================
-     SECTIONS SHARED
+     ABOUT
      ============================================= */
-  section { padding: 5rem 2.5rem; }
-  .section-label {
-    font-family: var(--mono);
-    font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 3rem;
-    display: flex; align-items: center; gap: .75rem;
+  #about { border-bottom: 1px solid var(--border); }
+  .stats-row {
+    display: flex; justify-content: center; gap: 3rem;
+    margin-top: 3rem; flex-wrap: wrap;
   }
-  .section-label::after {
-    content: '';
-    flex: 1; height: 1px; background: var(--border);
-  }
-  h2 {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 4vw, 3rem);
-    line-height: 1.1; letter-spacing: -.02em;
-    margin-bottom: 1rem;
-  }
-
-  /* =============================================
-     ABOUT / STATS
-     ============================================= */
-  #about { background: var(--surface); }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-  .about-text p { color: var(--ink-muted); margin-bottom: 1rem; }
-  .about-text p:last-child { margin-bottom: 0; }
-  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .stat-card {
-    background: var(--bg);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    border: 1px solid var(--border);
-    transition: transform .2s, border-color .2s;
-  }
-  .stat-card:hover { transform: translateY(-3px); border-color: var(--accent2); }
+  .stat { text-align: center; }
   .stat-num {
-    font-family: var(--serif);
-    font-size: 2.5rem;
-    color: var(--accent);
-    line-height: 1;
+    font-family: var(--serif); font-size: 2rem; font-weight: 400;
+    color: var(--ink); line-height: 1;
     margin-bottom: .25rem;
   }
-  .stat-label { font-size: 13px; color: var(--ink-muted); }
+  .stat-label { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-muted); }
 
   /* =============================================
-     SKILLS
+     SKILLS — tag list
      ============================================= */
-  #skills { background: var(--bg); }
-  .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
-  .skill-group {
-    background: var(--surface);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    border: 1px solid var(--border);
-    transition: box-shadow .2s;
-  }
-  .skill-group:hover { box-shadow: 0 8px 30px rgba(0,0,0,.06); }
+  #skills { border-bottom: 1px solid var(--border); }
+  .skills-groups { display: flex; flex-direction: column; gap: 2.5rem; margin-top: 2rem; }
+  .skill-group { text-align: center; }
   .skill-group-title {
-    font-family: var(--mono);
-    font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 1rem;
-    padding-bottom: .75rem; border-bottom: 1px solid var(--border);
+    font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-faint); margin-bottom: 1rem;
   }
-  .skill-item {
-    display: flex; flex-direction: column; gap: .4rem;
-    margin-bottom: .9rem;
+  .skill-tags { display: flex; flex-wrap: wrap; gap: .45rem; justify-content: center; }
+  .skill-tag {
+    font-size: 13px; font-weight: 400;
+    padding: .4rem .9rem;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--ink-muted);
+    transition: border-color .2s, color .2s;
   }
-  .skill-item:last-child { margin-bottom: 0; }
-  .skill-name { font-size: 13px; font-weight: 500; }
-  .skill-bar-bg {
-    height: 4px; background: var(--bg); border-radius: 999px; overflow: hidden;
-  }
-  .skill-bar-fill {
-    height: 100%; background: var(--accent); border-radius: 999px;
-    transform: scaleX(0); transform-origin: left;
-    transition: transform .8s cubic-bezier(.16,1,.3,1);
-  }
-  .skill-bar-fill.animated { transform: scaleX(1); }
+  .skill-tag:hover { border-color: var(--ink-muted); color: var(--ink); }
 
   /* =============================================
-     EXPERIENCE (timeline)
+     EXPERIENCE — always open timeline
      ============================================= */
-  #experience { background: var(--surface); }
-  .timeline { position: relative; padding-left: 2rem; }
-  .timeline::before {
+  #experience { border-bottom: 1px solid var(--border); }
+  .timeline { margin-top: 3rem; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .tl-item { position: relative; padding-bottom: 3rem; padding-left: 1.5rem; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item::before {
     content: '';
-    position: absolute; left: 0; top: 0; bottom: 0;
+    position: absolute; left: 0; top: 8px; bottom: 0;
     width: 1px; background: var(--border);
   }
-  .timeline-item {
-    position: relative; margin-bottom: 3rem;
-    cursor: pointer;
+  .tl-item:last-child::before { display: none; }
+  .tl-dot {
+    position: absolute; left: -4px; top: 8px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--bg); border: 1.5px solid var(--accent);
   }
-  .timeline-item:last-child { margin-bottom: 0; }
-  .timeline-dot {
-    position: absolute; left: -2rem;
-    width: 12px; height: 12px; border-radius: 50%;
-    background: var(--accent2); border: 2px solid var(--accent);
-    transform: translateX(-5px);
-    transition: background .2s;
+  .tl-meta {
+    font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink-faint); margin-bottom: .4rem;
   }
-  .timeline-item:hover .timeline-dot,
-  .timeline-item.active .timeline-dot { background: var(--accent); }
-  .timeline-header {
-    display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
-    flex-wrap: wrap; margin-bottom: .5rem;
+  .tl-role {
+    font-family: var(--serif); font-size: 1.15rem; font-weight: 400;
+    color: var(--ink); margin-bottom: .2rem;
   }
-  .timeline-role {
-    font-family: var(--serif); font-size: 1.25rem; line-height: 1.2;
+  .tl-org { font-size: 13px; color: var(--accent); margin-bottom: .75rem; }
+  .tl-bullets {
+    font-size: 13.5px; color: var(--ink-muted); line-height: 1.7;
+    padding-left: 1.1rem;
   }
-  .timeline-date {
-    font-family: var(--mono); font-size: 11px; letter-spacing: .06em;
-    color: var(--ink-muted); white-space: nowrap;
-  }
-  .timeline-org { font-size: 13px; color: var(--accent); margin-bottom: .5rem; }
-  .timeline-body {
-    font-size: 14px; color: var(--ink-muted); line-height: 1.65;
-    max-height: 0; overflow: hidden;
-    transition: max-height .4s ease, opacity .3s;
-    opacity: 0;
-  }
-  .timeline-body ul { padding-left: 1.2rem; margin-top: .5rem; }
-  .timeline-body li { margin-bottom: .3rem; }
-  .timeline-item.active .timeline-body { max-height: 400px; opacity: 1; }
-  .expand-hint {
-    font-family: var(--mono); font-size: 11px;
-    color: var(--ink-muted); margin-top: .4rem;
-    transition: color .2s;
-  }
-  .timeline-item:hover .expand-hint { color: var(--accent); }
-  .timeline-item.active .expand-hint { display: none; }
+  .tl-bullets li { margin-bottom: .35rem; }
+  .tl-bullets li:last-child { margin-bottom: 0; }
 
   /* =============================================
      PROJECTS
      ============================================= */
-  #projects { background: var(--bg); }
-  .projects-filter {
-    display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 2rem;
-  }
+  #projects { border-bottom: 1px solid var(--border); }
+  .filter-row { display: flex; gap: .4rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem; }
   .filter-btn {
-    font-family: var(--mono); font-size: 11px; letter-spacing: .08em;
-    padding: .35rem .9rem; border-radius: 999px;
-    border: 1px solid var(--border); background: var(--surface);
-    color: var(--ink-muted); cursor: pointer;
-    transition: all .2s;
-  }
-  .filter-btn.active,
-  .filter-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
-  .project-card {
-    background: var(--surface);
+    font-size: 11px; font-weight: 400; letter-spacing: .07em; text-transform: uppercase;
+    padding: .3rem .85rem;
     border-radius: var(--radius);
     border: 1px solid var(--border);
+    background: transparent; color: var(--ink-muted);
+    cursor: pointer; transition: all .2s;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--ink); color: var(--bg); border-color: var(--ink);
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-align: left;
+  }
+  .project-card {
+    background: var(--bg);
     padding: 1.5rem;
-    transition: transform .2s, box-shadow .2s;
-    display: flex; flex-direction: column;
+    transition: background .2s;
   }
-  .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,.07); }
+  .project-card:hover { background: var(--surface); }
   .project-card.hidden { display: none; }
-  .project-tag {
-    font-family: var(--mono); font-size: 10px; letter-spacing: .08em;
-    text-transform: uppercase; padding: .25rem .6rem;
-    border-radius: 999px; border: 1px solid var(--accent2);
-    color: var(--accent); background: var(--accent2);
-    align-self: flex-start; margin-bottom: .75rem;
+  .p-tag {
+    font-size: 10px; font-weight: 500; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--ink-faint); margin-bottom: .5rem;
   }
-  .project-title {
-    font-family: var(--serif); font-size: 1.1rem;
-    line-height: 1.25; margin-bottom: .5rem;
+  .p-title {
+    font-family: var(--serif); font-size: 1rem; font-weight: 400;
+    line-height: 1.3; color: var(--ink); margin-bottom: .4rem;
   }
-  .project-loc {
-    font-family: var(--mono); font-size: 11px; color: var(--ink-muted);
-    margin-bottom: .75rem;
-  }
-  .project-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.6; flex: 1; }
+  .p-loc { font-size: 11px; color: var(--ink-faint); margin-bottom: .6rem; }
+  .p-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.65; }
 
   /* =============================================
      EDUCATION
      ============================================= */
-  #education { background: var(--surface); }
-  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  #education { border-bottom: 1px solid var(--border); }
+  .edu-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; text-align: left; }
   .edu-card {
-    border-radius: var(--radius); border: 1px solid var(--border);
-    padding: 2rem; transition: border-color .2s;
+    padding: 1.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    transition: border-color .2s;
   }
-  .edu-card:hover { border-color: var(--accent); }
-  .edu-deg {
-    font-family: var(--serif); font-size: 1.2rem;
-    margin-bottom: .4rem;
+  .edu-card:hover { border-color: var(--ink-muted); }
+  .edu-deg { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; margin-bottom: .3rem; }
+  .edu-uni { font-size: 13px; color: var(--accent); margin-bottom: .2rem; }
+  .edu-meta { font-size: 11px; color: var(--ink-faint); letter-spacing: .04em; margin-bottom: 1rem; }
+  .edu-courses { font-size: 12.5px; color: var(--ink-muted); line-height: 1.7; }
+  .edu-badge {
+    display: inline-block; margin-top: 1rem;
+    font-size: 11px; font-weight: 500; letter-spacing: .06em;
+    padding: .25rem .7rem;
+    border-radius: var(--radius);
+    background: var(--bg); border: 1px solid var(--border);
+    color: var(--ink-muted);
   }
-  .edu-uni { font-size: 14px; color: var(--accent); margin-bottom: .25rem; }
-  .edu-meta {
-    font-family: var(--mono); font-size: 11px; color: var(--ink-muted);
-    margin-bottom: 1rem;
-  }
-  .edu-courses { font-size: 13px; color: var(--ink-muted); }
-  .edu-gpa {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: .35rem .8rem;
-    background: var(--accent2);
-    color: var(--accent);
-    border-radius: 999px;
-    font-family: var(--mono); font-size: 11px;
-    font-weight: 500;
+  .certs-row { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-top: 2.5rem; }
+  .cert-tag {
+    font-size: 12px; padding: .35rem .85rem;
+    border-radius: var(--radius);
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--ink-muted);
   }
 
   /* =============================================
      PUBLICATIONS
      ============================================= */
-  #publications { background: var(--bg); }
-  .pub-list { display: flex; flex-direction: column; gap: 1rem; }
+  #publications { border-bottom: 1px solid var(--border); }
+  .pub-list { margin-top: 2rem; display: flex; flex-direction: column; gap: .75rem; }
   .pub-item {
-    background: var(--surface);
-    border-radius: var(--radius); border: 1px solid var(--border);
     padding: 1.5rem;
+    background: var(--surface);
+    text-align: left;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
     transition: border-color .2s;
   }
-  .pub-item:hover { border-color: var(--accent); }
-  .pub-venue {
-    font-family: var(--mono); font-size: 11px; letter-spacing: .08em;
-    color: var(--accent); margin-bottom: .5rem;
-  }
-  .pub-title { font-size: 15px; font-weight: 500; color: var(--ink); }
+  .pub-item:hover { border-color: var(--ink-muted); }
+  .pub-venue { font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: .4rem; }
+  .pub-title { font-size: 14px; color: var(--ink); line-height: 1.6; }
 
   /* =============================================
      CONTACT
      ============================================= */
-  #contact {
-    background: var(--accent);
-    color: #fff;
-  }
-  #contact .section-label { color: var(--accent2); }
-  #contact .section-label::after { background: rgba(255,255,255,.2); }
-  #contact h2 { color: #fff; }
-  .contact-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 3rem; align-items: center;
-    margin-top: 2rem;
-  }
-  .contact-text { font-size: 1.05rem; opacity: .85; }
-  .contact-links { display: flex; flex-direction: column; gap: .75rem; }
+  #contact { border-bottom: 1px solid var(--border); }
+  .contact-links { display: flex; flex-direction: column; gap: .6rem; align-items: center; margin-top: 2rem; }
   .contact-link {
-    display: flex; align-items: center; gap: .75rem;
-    font-family: var(--mono); font-size: 13px;
-    color: rgba(255,255,255,.8);
-    border: 1px solid rgba(255,255,255,.2);
+    display: inline-flex; align-items: center; gap: .65rem;
+    font-size: 13px; color: var(--ink-muted);
+    padding: .6rem 1.25rem;
     border-radius: var(--radius);
-    padding: .9rem 1.2rem;
-    transition: background .2s, color .2s;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    min-width: 260px; justify-content: center;
+    transition: border-color .2s, color .2s;
   }
-  .contact-link:hover { background: rgba(255,255,255,.1); color: #fff; }
-  .contact-icon { font-size: 16px; }
+  .contact-link:hover { border-color: var(--ink-muted); color: var(--ink); }
 
   /* =============================================
      FOOTER
      ============================================= */
   footer {
-    text-align: center; padding: 2rem;
-    font-family: var(--mono); font-size: 11px;
-    color: var(--ink-muted); background: var(--bg);
-    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--ink-faint);
   }
-
-  /* =============================================
-     ANIMATIONS
-     ============================================= */
-  .fade-in {
-    opacity: 0; transform: translateY(24px);
-    transition: opacity .6s ease, transform .6s ease;
-  }
-  .fade-in.visible { opacity: 1; transform: translateY(0); }
 
   /* =============================================
      RESPONSIVE
      ============================================= */
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.25rem; }
+  @media (max-width: 640px) {
+    section { padding: 4rem 1.5rem; }
+    .edu-cards { grid-template-columns: 1fr; }
+    .stats-row { gap: 2rem; }
     .nav-links { gap: 1.2rem; }
-    section { padding: 3.5rem 1.25rem; }
-    #hero { padding: 0 1.25rem 3rem; }
-    .about-grid, .edu-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .scroll-hint { display: none; }
-    h1 { font-size: clamp(2.5rem, 12vw, 4rem); }
   }
 </style>
 </head>
 <body>
 
-<!-- ======= NAV ======= -->
-<nav id="nav">
-  <div class="nav-logo">AK / Portfolio</div>
+<!-- NAV -->
+<nav>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
@@ -476,436 +372,376 @@
   </div>
 </nav>
 
-<!-- ======= HERO ======= -->
+<!-- HERO -->
 <section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">Civil Engineer &amp; H&amp;H Analyst</div>
-    <!-- ✏️ EDIT: Change name below -->
-    <h1>Aayush<br><em>Khadka</em></h1>
-    <!-- ✏️ EDIT: Change the short bio below -->
+  <div class="fade-in">
+    <!-- ✏️ EDIT: Title and name -->
+    <div class="hero-title">Civil Engineer &amp; H&amp;H Analyst</div>
+    <div class="hero-name">Aayush <em>Khadka</em></div>
+    <!-- ✏️ EDIT: Short bio -->
     <p class="hero-desc">
       Water resources engineer focused on hydraulic &amp; hydrologic modeling,
-      stormwater management, and flood analysis across Louisiana and beyond.
+      stormwater management, and flood analysis across Louisiana.
     </p>
-    <!-- ✏️ EDIT: Add/remove skills pills -->
-    <div class="hero-pills">
-      <span class="pill">HEC-RAS 1D/2D</span>
-      <span class="pill">HEC-HMS</span>
-      <span class="pill">ArcGIS / QGIS</span>
-      <span class="pill">PCSWMM</span>
-      <span class="pill">Python</span>
-      <span class="pill">AutoCAD</span>
+    <!-- ✏️ EDIT: Add/remove tags -->
+    <div class="tag-row">
+      <span class="tag">HEC-RAS 1D/2D</span>
+      <span class="tag">HEC-HMS</span>
+      <span class="tag">ArcGIS / QGIS</span>
+      <span class="tag">PCSWMM</span>
+      <span class="tag">Python</span>
+      <span class="tag">AutoCAD</span>
     </div>
     <div class="hero-cta">
       <a href="#projects" class="btn btn-primary">View Projects</a>
       <a href="#contact" class="btn btn-outline">Get in Touch</a>
     </div>
   </div>
-  <div class="scroll-hint">
-    <span>scroll</span>
-    <div class="scroll-line"></div>
-  </div>
+  <div class="scroll-line"></div>
 </section>
 
-<!-- ======= ABOUT ======= -->
+<!-- ABOUT -->
 <section id="about">
-  <div class="section-label">About</div>
-  <div class="about-grid fade-in">
-    <div class="about-text">
-      <h2>Shaping water.<br>Protecting communities.</h2>
-      <!-- ✏️ EDIT: Update bio paragraphs -->
-      <p style="margin-top:1.5rem;">
-        I'm a civil engineering graduate student at the University of New Orleans,
-        specializing in hydraulic and hydrological analysis, stormwater management,
-        and water quality. I hold a 4.0 GPA and an Engineer-in-Training (EIT) certification.
-      </p>
-      <p>
-        At DDG, I model detention ponds, flood impacts, and channel improvements
-        across parishes in Louisiana. My research spans climate-change hydrology,
-        water-food-energy nexus modeling, and community disaster resilience.
-      </p>
-      <p>
-        My toolkit includes HEC-RAS, ArcGIS, Python, and HEC-FIA — with a grounding
-        in both fieldwork and high-fidelity computational modeling.
-      </p>
-    </div>
-    <!-- ✏️ EDIT: Change stat numbers/labels -->
-    <div class="stats-grid">
-      <div class="stat-card">
+  <div class="fade-in">
+    <div class="eyebrow">About</div>
+    <div class="divider"></div>
+    <h2>Shaping water,<br>protecting communities.</h2>
+    <!-- ✏️ EDIT: Bio -->
+    <p class="body-text">
+      I'm a civil engineering graduate student at the University of New Orleans,
+      specializing in hydraulic and hydrological analysis, stormwater management,
+      and water quality — with a 4.0 GPA and an Engineer-in-Training (EIT) certification.
+      At Duplantis Design Group, I model detention ponds, flood impacts, and channel
+      improvements across Louisiana. My research spans climate-change hydrology and
+      community disaster resilience.
+    </p>
+    <!-- ✏️ EDIT: Stats -->
+    <div class="stats-row">
+      <div class="stat">
         <div class="stat-num">4.0</div>
-        <div class="stat-label">GPA — University of New Orleans</div>
+        <div class="stat-label">GPA</div>
       </div>
-      <div class="stat-card">
+      <div class="stat">
         <div class="stat-num">5+</div>
-        <div class="stat-label">Projects across Louisiana parishes</div>
+        <div class="stat-label">LA Projects</div>
       </div>
-      <div class="stat-card">
+      <div class="stat">
         <div class="stat-num">EIT</div>
-        <div class="stat-label">Engineer-in-Training certified, LA 2024</div>
+        <div class="stat-label">Certified 2024</div>
       </div>
-      <div class="stat-card">
+      <div class="stat">
         <div class="stat-num">2</div>
-        <div class="stat-label">Published &amp; accepted papers</div>
+        <div class="stat-label">Publications</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======= SKILLS ======= -->
+<!-- SKILLS -->
 <section id="skills">
-  <div class="section-label">Skills</div>
-  <!-- ✏️ EDIT: Add/remove skill groups and items; width values are percentages (0–100) -->
-  <div class="skills-container fade-in">
-    <div class="skill-group">
-      <div class="skill-group-title">H&amp;H Modeling</div>
-      <div class="skill-item"><div class="skill-name">HEC-RAS 1D/2D</div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="92"></div></div></div>
-      <div class="skill-item"><div class="skill-name">HEC-HMS</div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div></div>
-      <div class="skill-item"><div class="skill-name">PCSWMM</div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="78"></div></div></div>
-      <div class="skill-item"><div class="skill-name">HEC-FIA</div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="72"></div></div></div>
-      <div class="skill-item"><div class="skill-name">EPANET</div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="65"></div></div></div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title">GIS &amp; Spatial</div>
-      <div class="skill-item"><div class="skill-name">ArcGIS</div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="90"></div></div></div>
-      <div class="skill-item"><div class="skill-name">QGIS</div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div></div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title">Design &amp; Drafting</div>
-      <div class="skill-item"><div class="skill-name">AutoCAD</div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="88"></div></div></div>
-      <div class="skill-item"><div class="skill-name">SketchUp</div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="70"></div></div></div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title">Programming</div>
-      <div class="skill-item"><div class="skill-name">Python</div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="80"></div></div></div>
-      <div class="skill-item"><div class="skill-name">Data Analysis</div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="82"></div></div></div>
-      <div class="skill-item"><div class="skill-name">C Programming</div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="55"></div></div></div>
+  <div class="fade-in">
+    <div class="eyebrow">Skills</div>
+    <div class="divider"></div>
+    <h2>Tools &amp; expertise</h2>
+    <!-- ✏️ EDIT: Add/remove skill groups and tags -->
+    <div class="skills-groups">
+      <div class="skill-group">
+        <div class="skill-group-title">H&amp;H Modeling</div>
+        <div class="skill-tags">
+          <span class="skill-tag">HEC-RAS 1D/2D</span>
+          <span class="skill-tag">HEC-HMS</span>
+          <span class="skill-tag">PCSWMM</span>
+          <span class="skill-tag">HEC-FIA</span>
+          <span class="skill-tag">EPANET</span>
+          <span class="skill-tag">Hymod</span>
+          <span class="skill-tag">HBV</span>
+          <span class="skill-tag">MILC</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">GIS &amp; Spatial Analysis</div>
+        <div class="skill-tags">
+          <span class="skill-tag">ArcGIS</span>
+          <span class="skill-tag">QGIS</span>
+          <span class="skill-tag">daWUAP</span>
+          <span class="skill-tag">Gephi (SNA)</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Design &amp; Drafting</div>
+        <div class="skill-tags">
+          <span class="skill-tag">AutoCAD</span>
+          <span class="skill-tag">SketchUp</span>
+          <span class="skill-tag">Adobe Creative Suite</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Programming &amp; Data</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Data Analysis</span>
+          <span class="skill-tag">C Programming</span>
+          <span class="skill-tag">MS Excel</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ======= EXPERIENCE ======= -->
-<section id="experience">
-  <div class="section-label">Experience</div>
-  <h2 class="fade-in">Where I've worked</h2>
-  <!-- ✏️ EDIT: Add/remove timeline items. Click each item to expand. -->
-  <div class="timeline fade-in" style="margin-top:2.5rem;">
+<!-- EXPERIENCE -->
+<section id="experience" class="wide">
+  <div class="fade-in" style="text-align:center;">
+    <div class="eyebrow">Experience</div>
+    <div class="divider"></div>
+    <h2>Where I've worked</h2>
+  </div>
+  <!-- ✏️ EDIT: Add/remove timeline entries -->
+  <div class="timeline fade-in">
 
-    <div class="timeline-item active">
-      <div class="timeline-dot"></div>
-      <div class="timeline-header">
-        <div class="timeline-role">H&amp;H Analyst — DDG</div>
-        <div class="timeline-date">Current</div>
-      </div>
-      <div class="timeline-org">Dufrene Desai Geotech, Louisiana</div>
-      <div class="timeline-body">
-        <ul>
-          <li>Modeled detention ponds and channel improvements in Morgan Subdivision, St. Tammany Parish.</li>
-          <li>Conducted Benefit-Cost Analysis (BCA) for stormwater improvement alternatives.</li>
-          <li>Performed H&amp;H model prep and flood impact assessments for Bayou Bonfouca regional detention pond using HEC-RAS and HEC-FIA.</li>
-          <li>Ran HEC-RAS breakout model for Burbank Apartments offsite drainage compliance assessment.</li>
-          <li>Executed 1D No-Rise Analysis for channel improvements along Acadiana Coulee, Lafayette.</li>
-          <li>Prepared figures, maps, exhibits, and reports across all projects.</li>
-        </ul>
-      </div>
-      <div class="expand-hint">↓ click to expand</div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-meta">Current</div>
+      <div class="tl-role">H&amp;H Analyst</div>
+      <div class="tl-org">Duplantis Design Group (DDG) — Louisiana</div>
+      <ul class="tl-bullets">
+        <li>Modeled detention ponds and channel improvements for Morgan Subdivision drainage study, St. Tammany Parish.</li>
+        <li>Conducted Benefit-Cost Analysis (BCA) for stormwater improvement alternatives.</li>
+        <li>H&amp;H model prep and flood impact assessments for Bayou Bonfouca regional detention pond using HEC-RAS and HEC-FIA.</li>
+        <li>HEC-RAS breakout model for Burbank Apartments offsite drainage compliance, East Baton Rouge Parish.</li>
+        <li>1D No-Rise analysis for channel improvements along Acadiana Coulee, Lafayette.</li>
+        <li>Prepared figures, maps, exhibits, and reports across all projects.</li>
+      </ul>
     </div>
 
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-header">
-        <div class="timeline-role">Research Assistant</div>
-        <div class="timeline-date">Aug 2023 – Present</div>
-      </div>
-      <div class="timeline-org">University of New Orleans</div>
-      <div class="timeline-body">
-        <ul>
-          <li>Hydrologic modeling of USGS basins using Hymod, HBV, and MILC models.</li>
-          <li>Analyzed Water-Food-Energy Nexus &amp; climate change using GIS &amp; Python hydro-economic model (daWUAP), funded by the Louisiana Board of Regents.</li>
-          <li>Investigated post-disaster resiliency in rural New Orleans communities via social network analysis (Gephi).</li>
-        </ul>
-      </div>
-      <div class="expand-hint">↓ click to expand</div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-meta">Aug 2023 – Present</div>
+      <div class="tl-role">Research Assistant</div>
+      <div class="tl-org">University of New Orleans</div>
+      <ul class="tl-bullets">
+        <li>Hydrologic modeling of USGS basins using Hymod, HBV, and MILC models.</li>
+        <li>Analyzed Water-Food-Energy Nexus &amp; climate change using Python hydro-economic model (daWUAP), funded by Louisiana Board of Regents.</li>
+        <li>Post-disaster resiliency research in rural New Orleans communities via social network analysis (Gephi).</li>
+      </ul>
     </div>
 
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-header">
-        <div class="timeline-role">Civil Engineer</div>
-        <div class="timeline-date">Sep 2022 – May 2023</div>
-      </div>
-      <div class="timeline-org">Shubhakamana Engineering Consultancy, Nepal</div>
-      <div class="timeline-body">
-        <ul>
-          <li>Watershed analysis, map creation, and river modeling using HEC-RAS and ArcGIS.</li>
-          <li>Topographic maps and drawings via AutoCAD.</li>
-          <li>Quantity estimation, cost analysis, and report preparation for highway drainage, bridge, and culvert projects.</li>
-        </ul>
-      </div>
-      <div class="expand-hint">↓ click to expand</div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-meta">Sep 2022 – May 2023</div>
+      <div class="tl-role">Civil Engineer</div>
+      <div class="tl-org">Shubhakamana Engineering Consultancy — Nepal</div>
+      <ul class="tl-bullets">
+        <li>Watershed analysis, map creation, and river modeling using HEC-RAS and ArcGIS.</li>
+        <li>Topographic maps and drawings via AutoCAD.</li>
+        <li>Quantity estimation, cost analysis, and reports for highway drainage, bridge, and culvert projects.</li>
+      </ul>
     </div>
 
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-header">
-        <div class="timeline-role">Junior Civil Engineer</div>
-        <div class="timeline-date">Nov 2021 – Jul 2022</div>
-      </div>
-      <div class="timeline-org">DRS Developers and Designers Pvt. Ltd., Nepal</div>
-      <div class="timeline-body">
-        <ul>
-          <li>Drafted detailed engineering drawings for highway and building construction (AutoCAD, SketchUp).</li>
-          <li>Managed documentation and records using MS Office tools.</li>
-        </ul>
-      </div>
-      <div class="expand-hint">↓ click to expand</div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-meta">Nov 2021 – Jul 2022</div>
+      <div class="tl-role">Junior Civil Engineer</div>
+      <div class="tl-org">DRS Developers and Designers Pvt. Ltd. — Nepal</div>
+      <ul class="tl-bullets">
+        <li>Drafted detailed engineering drawings for highway and building construction (AutoCAD, SketchUp).</li>
+        <li>Managed documentation and records using MS Office tools.</li>
+      </ul>
     </div>
 
   </div>
 </section>
 
-<!-- ======= PROJECTS ======= -->
-<section id="projects">
-  <div class="section-label">Projects</div>
-  <h2 class="fade-in">Selected work</h2>
-  <!-- ✏️ EDIT: Filter buttons — data-filter must match project-card's data-tag -->
-  <div class="projects-filter fade-in" style="margin-top:1.5rem;">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="stormwater">Stormwater</button>
-    <button class="filter-btn" data-filter="hh">H&amp;H Analysis</button>
-    <button class="filter-btn" data-filter="research">Research</button>
-    <button class="filter-btn" data-filter="nepal">Nepal</button>
+<!-- PROJECTS -->
+<section id="projects" class="wide">
+  <div class="fade-in" style="text-align:center;">
+    <div class="eyebrow">Projects</div>
+    <div class="divider"></div>
+    <h2>Selected work</h2>
+    <!-- ✏️ EDIT: Filter buttons — data-filter must match project card's data-tag -->
+    <div class="filter-row">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="stormwater">Stormwater</button>
+      <button class="filter-btn" data-filter="hh">H&amp;H</button>
+      <button class="filter-btn" data-filter="research">Research</button>
+      <button class="filter-btn" data-filter="nepal">Nepal</button>
+    </div>
   </div>
   <!-- ✏️ EDIT: Add/remove project cards; data-tag must match a filter button -->
-  <div class="projects-grid fade-in" style="margin-top:1.5rem;">
+  <div class="projects-grid fade-in">
 
     <div class="project-card" data-tag="stormwater hh">
-      <div class="project-tag">Stormwater · H&amp;H</div>
-      <div class="project-title">Morgan Subdivision Drainage Improvement Study</div>
-      <div class="project-loc">📍 St. Tammany Parish, LA</div>
-      <div class="project-desc">Modeled detention ponds and channel improvements; performed Benefit-Cost Analysis for stormwater alternatives and contributed to final report.</div>
+      <div class="p-tag">Stormwater · H&amp;H</div>
+      <div class="p-title">Morgan Subdivision Drainage Improvement Study</div>
+      <div class="p-loc">St. Tammany Parish, LA</div>
+      <div class="p-desc">Modeled detention ponds and channel improvements; performed Benefit-Cost Analysis and contributed to report preparation.</div>
     </div>
 
     <div class="project-card" data-tag="stormwater hh">
-      <div class="project-tag">Stormwater · H&amp;H</div>
-      <div class="project-title">Regional Stormwater Improvements Near LA-1085 &amp; LA-1077</div>
-      <div class="project-loc">📍 Covington, St. Tammany Parish, LA</div>
-      <div class="project-desc">H&amp;H model preparation and flood impact assessments for regional stormwater improvement analysis in Covington.</div>
+      <div class="p-tag">Stormwater · H&amp;H</div>
+      <div class="p-title">Regional Stormwater Improvements Near LA-1085 &amp; LA-1077</div>
+      <div class="p-loc">Covington, St. Tammany Parish, LA</div>
+      <div class="p-desc">H&amp;H model preparation and flood impact assessments for regional stormwater improvement analysis.</div>
     </div>
 
     <div class="project-card" data-tag="hh">
-      <div class="project-tag">H&amp;H Analysis</div>
-      <div class="project-title">Bayou Bonfouca Regional Detention Pond</div>
-      <div class="project-loc">📍 St. Tammany Parish, LA</div>
-      <div class="project-desc">Hydraulic and hydrologic analysis for regional detention pond design using HEC-RAS and HEC-FIA; prepared maps and exhibits for the report.</div>
+      <div class="p-tag">H&amp;H Analysis</div>
+      <div class="p-title">Bayou Bonfouca Regional Detention Pond</div>
+      <div class="p-loc">St. Tammany Parish, LA</div>
+      <div class="p-desc">Hydraulic and hydrologic analysis for detention pond design using HEC-RAS and HEC-FIA; prepared maps and exhibits.</div>
     </div>
 
     <div class="project-card" data-tag="hh">
-      <div class="project-tag">H&amp;H Analysis</div>
-      <div class="project-title">Burbank Apartments Offsite Drainage Assessment</div>
-      <div class="project-loc">📍 East Baton Rouge Parish, LA</div>
-      <div class="project-desc">HEC-RAS breakout model preparation and simulation to verify parish drainage requirement compliance.</div>
+      <div class="p-tag">H&amp;H Analysis</div>
+      <div class="p-title">Burbank Apartments Offsite Drainage Assessment</div>
+      <div class="p-loc">East Baton Rouge Parish, LA</div>
+      <div class="p-desc">HEC-RAS breakout model to verify parish drainage requirement compliance.</div>
     </div>
 
     <div class="project-card" data-tag="hh">
-      <div class="project-tag">H&amp;H Analysis</div>
-      <div class="project-title">Robley Road No-Rise Analysis</div>
-      <div class="project-loc">📍 Lafayette, LA</div>
-      <div class="project-desc">1D No-Rise analysis for channel improvements along Acadiana Coulee using FEMA's HEC-RAS model and survey cross-section data.</div>
+      <div class="p-tag">H&amp;H Analysis</div>
+      <div class="p-title">Robley Road No-Rise Analysis</div>
+      <div class="p-loc">Lafayette, LA</div>
+      <div class="p-desc">1D No-Rise analysis for channel improvements along Acadiana Coulee using FEMA's HEC-RAS model.</div>
     </div>
 
     <div class="project-card" data-tag="research">
-      <div class="project-tag">Research</div>
-      <div class="project-title">Water-Food-Energy Nexus &amp; Climate Change Modeling</div>
-      <div class="project-loc">📍 University of New Orleans</div>
-      <div class="project-desc">GIS and Python-based hydro-economic coupled model (daWUAP) analyzing climate change impacts in the Lower Mississippi Basin, funded by Louisiana Board of Regents.</div>
+      <div class="p-tag">Research</div>
+      <div class="p-title">Water-Food-Energy Nexus &amp; Climate Change Modeling</div>
+      <div class="p-loc">University of New Orleans</div>
+      <div class="p-desc">GIS and Python-based hydro-economic model (daWUAP) analyzing climate change impacts in the Lower Mississippi Basin.</div>
     </div>
 
     <div class="project-card" data-tag="research">
-      <div class="project-tag">Research</div>
-      <div class="project-title">Post-Disaster Resiliency in Rural New Orleans Communities</div>
-      <div class="project-loc">📍 University of New Orleans</div>
-      <div class="project-desc">Literature reviews, surveys, and social network analysis using Gephi to identify resiliency challenges in rural communities.</div>
+      <div class="p-tag">Research</div>
+      <div class="p-title">Post-Disaster Resiliency in Rural New Orleans Communities</div>
+      <div class="p-loc">University of New Orleans</div>
+      <div class="p-desc">Literature reviews, surveys, and social network analysis (Gephi) to identify resiliency challenges.</div>
     </div>
 
     <div class="project-card" data-tag="nepal">
-      <div class="project-tag">Nepal</div>
-      <div class="project-title">Hospital DPR — Bardaghat Municipality</div>
-      <div class="project-loc">📍 Nawalparasi, Nepal</div>
-      <div class="project-desc">Preparation of Detailed Project Report for a 15-bed hospital including site selection, structural design, and documentation.</div>
+      <div class="p-tag">Nepal</div>
+      <div class="p-title">Hospital DPR — Bardaghat Municipality</div>
+      <div class="p-loc">Nawalparasi, Nepal</div>
+      <div class="p-desc">Detailed Project Report for a 15-bed hospital including site selection, structural design, and documentation.</div>
     </div>
 
     <div class="project-card" data-tag="nepal">
-      <div class="project-tag">Nepal</div>
-      <div class="project-title">Kalo Khola Dobilla Motorable Bridge</div>
-      <div class="project-loc">📍 Baglung District, Nepal</div>
-      <div class="project-desc">Site selection, detailed engineering survey, soil investigation, geotechnical and hydrological investigation, and full detailed design.</div>
+      <div class="p-tag">Nepal</div>
+      <div class="p-title">Kalo Khola Dobilla Motorable Bridge</div>
+      <div class="p-loc">Baglung District, Nepal</div>
+      <div class="p-desc">Site selection, engineering survey, geotechnical and hydrological investigation, and full detailed design.</div>
     </div>
 
     <div class="project-card" data-tag="nepal">
-      <div class="project-tag">Nepal</div>
-      <div class="project-title">Deurali–Mulabari–Gyaji Road Design</div>
-      <div class="project-loc">📍 Nepal</div>
-      <div class="project-desc">Detailed engineering survey, design, and report preparation for multi-segment rural road corridor.</div>
+      <div class="p-tag">Nepal</div>
+      <div class="p-title">Deurali–Mulabari–Gyaji Road Design</div>
+      <div class="p-loc">Nepal</div>
+      <div class="p-desc">Detailed engineering survey, design, and report preparation for a multi-segment rural road corridor.</div>
     </div>
 
   </div>
 </section>
 
-<!-- ======= EDUCATION ======= -->
-<section id="education">
-  <div class="section-label">Education</div>
-  <h2 class="fade-in">Academic background</h2>
-  <!-- ✏️ EDIT: Update degree cards -->
-  <div class="edu-grid fade-in" style="margin-top:2rem;">
+<!-- EDUCATION -->
+<section id="education" class="wide">
+  <div class="fade-in" style="text-align:center;">
+    <div class="eyebrow">Education</div>
+    <div class="divider"></div>
+    <h2>Academic background</h2>
+  </div>
+  <!-- ✏️ EDIT: Degree cards -->
+  <div class="edu-cards fade-in">
     <div class="edu-card">
       <div class="edu-deg">M.S. in Civil Engineering</div>
       <div class="edu-uni">University of New Orleans, Louisiana</div>
       <div class="edu-meta">Aug 2023 – May 2025</div>
-      <div class="edu-courses">
-        Hydrology · Design of Water &amp; Wastewater Treatment ·
-        Ocean &amp; Coastal Engineering · Coastal &amp; Hydraulic Structures ·
-        Sediment Transport &amp; Dredging
-      </div>
-      <div class="edu-gpa">GPA 4.0 / 4.0</div>
+      <div class="edu-courses">Hydrology · Water &amp; Wastewater Treatment · Ocean &amp; Coastal Engineering · Hydraulic Structures · Sediment Transport &amp; Dredging</div>
+      <div class="edu-badge">GPA 4.0 / 4.0</div>
     </div>
     <div class="edu-card">
       <div class="edu-deg">B.E. in Civil Engineering</div>
-      <div class="edu-uni">Tribhuvan University, Kathmandu, Nepal</div>
-      <div class="edu-meta">Nov 2016 – Apr 2021 · Merit Waiver All 8 Semesters</div>
-      <div class="edu-courses">
-        Fluid Mechanics · Hydraulics · Hydrology ·
-        Irrigation &amp; Drainage · Water Supply &amp; Sanitary Engineering ·
-        Transportation Engineering · RCC Structures · Structural Dynamics
-      </div>
-      <div class="edu-gpa">Score: 78.93%</div>
+      <div class="edu-uni">Tribhuvan University, Nepal</div>
+      <div class="edu-meta">Nov 2016 – Apr 2021 · Merit Waiver, All 8 Semesters</div>
+      <div class="edu-courses">Fluid Mechanics · Hydraulics · Hydrology · Irrigation &amp; Drainage · Water Supply · Transportation Engineering · RCC Structures</div>
+      <div class="edu-badge">Score: 78.93%</div>
     </div>
   </div>
-  <!-- Certifications -->
-  <div class="fade-in" style="margin-top:2rem;">
-    <div class="section-label" style="margin-bottom:1rem;">Certifications &amp; Training</div>
-    <!-- ✏️ EDIT: Add/remove certification items -->
-    <div style="display:flex; flex-wrap:wrap; gap:.75rem;">
-      <span class="pill" style="font-size:12px; padding:.45rem 1rem;">EIT — Louisiana, 2024</span>
-      <span class="pill" style="font-size:12px; padding:.45rem 1rem;">NOLA Clean Energy Fellowship 2025</span>
-      <span class="pill" style="font-size:12px; padding:.45rem 1rem;">ArcGIS &amp; QGIS Training</span>
-      <span class="pill" style="font-size:12px; padding:.45rem 1rem;">HEC-HMS &amp; PCSWMM Training</span>
-      <span class="pill" style="font-size:12px; padding:.45rem 1rem;">Nepal Engineering Council — Civil 'A' Category</span>
-      <span class="pill" style="font-size:12px; padding:.45rem 1rem;">ASCE UNO Chapter Member</span>
+  <!-- ✏️ EDIT: Add/remove certifications -->
+  <div class="fade-in" style="text-align:center; margin-top:2.5rem;">
+    <div class="eyebrow" style="margin-bottom:1rem;">Certifications &amp; Training</div>
+    <div class="certs-row">
+      <span class="cert-tag">EIT — Louisiana, 2024</span>
+      <span class="cert-tag">NOLA Clean Energy Fellowship 2025</span>
+      <span class="cert-tag">ArcGIS &amp; QGIS Training</span>
+      <span class="cert-tag">HEC-HMS &amp; PCSWMM Training</span>
+      <span class="cert-tag">Nepal Engineering Council — Civil 'A' Category</span>
+      <span class="cert-tag">ASCE UNO Chapter Member</span>
     </div>
   </div>
 </section>
 
-<!-- ======= PUBLICATIONS ======= -->
+<!-- PUBLICATIONS -->
 <section id="publications">
-  <div class="section-label">Publications</div>
-  <h2 class="fade-in">Research &amp; papers</h2>
-  <!-- ✏️ EDIT: Add/remove publication items -->
-  <div class="pub-list fade-in" style="margin-top:2rem;">
-    <div class="pub-item">
-      <div class="pub-venue">ASC International Conference 2025 · Accepted</div>
-      <div class="pub-title">A. Khadka, E. Safapour, B. Rouhanizadeh &amp; M. Tafazzoli — "A Comprehensive Review of Construction 4.0 Benefits"</div>
-    </div>
-    <div class="pub-item">
-      <div class="pub-venue">ASCE CI CRC Joint Conference 2024</div>
-      <div class="pub-title">A. Silwal, A. Khadka &amp; E. Safapour — "A Bibliometric and Visualization Study of Sustainable Transport Infrastructure"</div>
+  <div class="fade-in">
+    <div class="eyebrow">Publications</div>
+    <div class="divider"></div>
+    <h2>Research &amp; papers</h2>
+    <!-- ✏️ EDIT: Add/remove publications -->
+    <div class="pub-list">
+      <div class="pub-item">
+        <div class="pub-venue">ASC International Conference 2025 · Accepted</div>
+        <div class="pub-title">A. Khadka, E. Safapour, B. Rouhanizadeh &amp; M. Tafazzoli — "A Comprehensive Review of Construction 4.0 Benefits"</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-venue">ASCE CI CRC Joint Conference 2024</div>
+        <div class="pub-title">A. Silwal, A. Khadka &amp; E. Safapour — "A Bibliometric and Visualization Study of Sustainable Transport Infrastructure"</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ======= CONTACT ======= -->
+<!-- CONTACT -->
 <section id="contact">
-  <div class="section-label">Contact</div>
-  <h2>Let's connect</h2>
-  <div class="contact-grid">
-    <!-- ✏️ EDIT: Update the bio sentence -->
-    <p class="contact-text">
+  <div class="fade-in">
+    <div class="eyebrow">Contact</div>
+    <div class="divider"></div>
+    <h2>Let's connect</h2>
+    <!-- ✏️ EDIT: Bio line -->
+    <p class="body-text">
       Open to research collaborations, engineering roles, and project discussions
       in water resources, stormwater, and hydraulic engineering.
     </p>
-    <!-- ✏️ EDIT: Update email, phone, LinkedIn URL -->
+    <!-- ✏️ EDIT: Contact links -->
     <div class="contact-links">
-      <a class="contact-link" href="mailto:aayushkhadka278@gmail.com">
-        <span class="contact-icon">✉</span>
-        aayushkhadka278@gmail.com
-      </a>
-      <a class="contact-link" href="tel:+15043146807">
-        <span class="contact-icon">☎</span>
-        +1 (504) 314-6807
-      </a>
-      <a class="contact-link" href="https://linkedin.com/in/aayushkhadka" target="_blank" rel="noopener">
-        <span class="contact-icon">in</span>
-        linkedin.com/in/aayushkhadka
-      </a>
-      <a class="contact-link" href="#">
-        <span class="contact-icon">📍</span>
-        New Orleans, Louisiana
-      </a>
+      <a class="contact-link" href="mailto:aayushkhadka278@gmail.com">✉ &nbsp;aayushkhadka278@gmail.com</a>
+      <a class="contact-link" href="tel:+15043146807">☎ &nbsp;+1 (504) 314-6807</a>
+      <a class="contact-link" href="https://linkedin.com/in/aayushkhadka" target="_blank" rel="noopener">in &nbsp;linkedin.com/in/aayushkhadka</a>
+      <a class="contact-link" href="#">📍 &nbsp;New Orleans, Louisiana</a>
     </div>
   </div>
 </section>
 
-<!-- ======= FOOTER ======= -->
+<!-- FOOTER -->
 <footer>
-  <!-- ✏️ EDIT: Update name and year -->
-  &copy; 2025 Aayush Khadka · Built with HTML, CSS &amp; JS
+  <!-- ✏️ EDIT: Year and name -->
+  &copy; 2025 Aayush Khadka
 </footer>
 
-<!-- ======= SCRIPTS ======= -->
 <script>
-/* --- Nav shadow on scroll --- */
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-});
+/* Fade in on scroll */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
 
-/* --- Fade-in on scroll (IntersectionObserver) --- */
-const faders = document.querySelectorAll('.fade-in');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-  });
-}, { threshold: 0.12 });
-faders.forEach(el => io.observe(el));
-
-/* --- Skill bars animate when visible --- */
-const bars = document.querySelectorAll('.skill-bar-fill');
-const barIO = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const w = e.target.dataset.width;
-      e.target.style.width = w + '%';
-      e.target.classList.add('animated');
-      barIO.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.3 });
-bars.forEach(b => barIO.observe(b));
-
-/* --- Timeline expand/collapse --- */
-document.querySelectorAll('.timeline-item').forEach(item => {
-  item.addEventListener('click', () => {
-    const isActive = item.classList.contains('active');
-    document.querySelectorAll('.timeline-item').forEach(i => i.classList.remove('active'));
-    if (!isActive) item.classList.add('active');
-  });
-});
-
-/* --- Project filter --- */
-const filterBtns = document.querySelectorAll('.filter-btn');
-const cards = document.querySelectorAll('.project-card');
-filterBtns.forEach(btn => {
+/* Project filter */
+document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const f = btn.dataset.filter;
-    cards.forEach(c => {
-      if (f === 'all' || c.dataset.tag.includes(f)) {
-        c.classList.remove('hidden');
-      } else {
-        c.classList.add('hidden');
-      }
+    document.querySelectorAll('.project-card').forEach(c => {
+      c.classList.toggle('hidden', f !== 'all' && !c.dataset.tag.includes(f));
     });
   });
 });
